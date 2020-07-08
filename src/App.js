@@ -24,4 +24,21 @@ export default class App extends Component {
     //   <button className="btn btn-info m-2" onClick={this.handleClick}>Click me </button>
     //   Number of things: {this.isEven(this.state.count)}
     // </h4>
+    <div className="container-fluid p-4">
+      <div className="row bg-info text-white p-2">
+        <div className="col font-weight-bold" > Value</div>
+        <div className="col-9 font-weight-bold" >Even?</div>
+      </div>
+      <div className="row bg-light p-2 border">
+        <div className="col-3">{this.state.count}</div>
+        <div className={this.getClassName(this.state.count)}>{this.isEven(this.state.count)}</div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <button className="btn btn-info m-2" onClick={this.handleClick}>
+            Click me
+          </button>
+        </div>
+      </div>
+    </div>
 }
