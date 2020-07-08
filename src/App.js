@@ -17,28 +17,33 @@ export default class App extends Component {
   getClassName(val) {
     return val % 2 === 0 ? this.state.primary : this.state.secondary;
   }
-
-  handleClick = () => this.setState({ count: this.state.count + 1 })
+  componentDidMount = () => {
+    this.setState({
+      count:
+        isNaN(localStorage.getItem("count")) ? 1: parseInt(localStorage.getItem("count"))
+    })
+  }
+  handleClick = () => {
+    this.setState({ count: this.state.count + 1 })
+    localStorage.setItem("count", this.state.count)
+  }
   render = () =>
-    // <h4 className={this.getClassName(this.state.count)}>
-    //   <button className="btn btn-info m-2" onClick={this.handleClick}>Click me </button>
-    //   Number of things: {this.isEven(this.state.count)}
-    // </h4>
-    <div className="container-fluid p-4">
-      <div className="row bg-info text-white p-2">
-        <div className="col font-weight-bold" > Value</div>
-        <div className="col-9 font-weight-bold" >Even?</div>
-      </div>
-      <div className="row bg-light p-2 border">
-        <div className="col-3">{this.state.count}</div>
-        <div className={this.getClassName(this.state.count)}>{this.isEven(this.state.count)}</div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <button className="btn btn-info m-2" onClick={this.handleClick}>
-            Click me
-          </button>
-        </div>
-      </div>
-    </div>
+    <table className="table table-striped table=bordered table-sm">
+      <thead className="bg-info text-white">
+        <tr><th>Value</th><th>Even?</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{this.state.count}</td>
+          <td>{this.isEven(this.state.count)} </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colSpan="2" className="text-center">
+            <button className="btn btn-info m-2" onClick={this.handleClick}>Click me</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
 }
